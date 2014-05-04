@@ -23,9 +23,13 @@ module.exports = function(grunt) {
     },
 
     preprocess: {
-      core_build: {
-        src: 'src/childviewcontainer.js',
+      umd: {
+        src: 'src/build/backbone.babysitter.js',
         dest: 'lib/backbone.babysitter.js'
+      },
+      bare: {
+        src: 'src/build/backbone.babysitter.bare.js',
+        dest: 'lib/backbone.babysitter.bare.js'
       }
     },
 
@@ -35,9 +39,13 @@ module.exports = function(grunt) {
           version: '<%= meta.version %>'
         }
       },
-      core: {
-        src: '<%= preprocess.core_build.dest %>',
-        dest: '<%= preprocess.core_build.dest %>'
+      umd: {
+        src: '<%= preprocess.umd.dest %>',
+        dest: '<%= preprocess.umd.dest %>'
+      },
+      bare: {
+        src: '<%= preprocess.bare.dest %>',
+        dest: '<%= preprocess.bare.dest %>'
       }
     },
 
@@ -45,9 +53,13 @@ module.exports = function(grunt) {
       options: {
         banner: "<%= meta.banner %>"
       },
-      core: {
-        src: 'lib/backbone.babysitter.js',
-        dest: 'lib/backbone.babysitter.js'
+      umd: {
+        src: '<%= preprocess.umd.dest %>',
+        dest: '<%= preprocess.umd.dest %>'
+      },
+      bare: {
+        src: '<%= preprocess.bare.dest %>',
+        dest: '<%= preprocess.bare.dest %>'
       }
     },
 
@@ -55,12 +67,21 @@ module.exports = function(grunt) {
       options: {
         banner: "<%= meta.banner %>"
       },
-      core : {
+      umd : {
         src : 'lib/backbone.babysitter.js',
         dest : 'lib/backbone.babysitter.min.js',
         options : {
           sourceMap : 'lib/backbone.babysitter.map',
           sourceMappingURL : 'backbone.babysitter.map',
+          sourceMapPrefix : 2
+        }
+      },
+      bare : {
+        src : 'lib/backbone.babysitter.bare.js',
+        dest : 'lib/backbone.babysitter.bare.min.js',
+        options : {
+          sourceMap : 'lib/backbone.babysitter.bare.map',
+          sourceMappingURL : 'backbone.babysitter.bare.map',
           sourceMapPrefix : 2
         }
       }
